@@ -1,5 +1,7 @@
 `git submodule add https://github.com/42Paris/minilibx-linux.git minilibx-linux`
 
+`git add .gitmodules minilibx-linux`
+
 `git commit -m "Add minilibx-linux as a git submodule"`
 
 `git push origin main`
