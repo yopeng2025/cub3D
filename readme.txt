@@ -4,9 +4,19 @@ minilibx
 	[submodule "minilibx-linux"]
 	path = minilibx-linux
 	url = https://github.com/42Paris/minilibx-linux.git
+或者：
+	`git submodule add https://github.com/42Paris/minilibx-linux.git minilibx-linux`
+
+	`git add .gitmodules minilibx-linux`
+
+	`git commit -m "Add minilibx-linux as a git submodule"`
+
+	`git push origin main`
+
+Git 会记录minilibx子模块链接和路径，但源码本身不会直接存到主仓库
 3. 提交作业时添加.gitmodules 不加minilibx-linux
 4. 批改作业时 terminal输入:
-	git submodule update --init --recursive
+	`git submodule update --init --recursive`
 	直接克隆minilibx仓库
 	
 运行
