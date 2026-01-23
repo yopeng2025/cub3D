@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: peiyli <peiyli@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yopeng <yopeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 15:29:04 by peiyli            #+#    #+#             */
-/*   Updated: 2026/01/22 15:29:05 by peiyli           ###   ########.fr       */
+/*   Updated: 2026/01/23 15:45:36 by yopeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ bool	create_window(t_data *data)
 	if (!init_mlx_window(data))
 		return (false);
 	update_image(data);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 	mlx_hook(data->mlx_win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->mlx_win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->mlx_win, 17, 0, close_window, data);
