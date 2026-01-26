@@ -1,4 +1,4 @@
-minilibx
+minilibx(已经在makefile中自动下载更新，只要正常make和make bonus就好)
 1. 建立.gitmodules
 2. 填充
 	[submodule "minilibx-linux"]
@@ -20,7 +20,7 @@ Git 会记录minilibx子模块链接和路径，但源码本身不会直接存�
 	直接克隆minilibx仓库
 	
 运行
-   git submodule update --init --recursive
+   （可选）git submodule update --init --recursive
 1. cd minilibx-linux
 2. make
 3. cd ..

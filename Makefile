@@ -4,11 +4,12 @@ NAME_BONUS = cub3D_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iinclude -Ilibft
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
+MLX_REPO = https://github.com/42Paris/minilibx-linux.git
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
 
 SRC = \
 	src/main.c \
@@ -71,7 +72,7 @@ all: $(LIBFT) $(NAME)
 
 bonus: $(LIBFT) $(NAME_BONUS)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX_LIB)
+$(NAME): $(MLX_LIB) $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_LIB) -lXext -lX11 -lm -o $(NAME)
 
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(MLX_LIB)
@@ -80,6 +81,12 @@ $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(MLX_LIB)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
+$(MLX_LIB):
+	if [ ! -d $(MLX_DIR) ]; then \
+		git clone $(MLX_REPO) $(MLX_DIR); \
+	fi
+	$(MAKE) -C $(MLX_DIR)
+
 $(OBJ_DIR)/%.o: src/%.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -87,11 +94,13 @@ $(OBJ_DIR)/%.o: src/%.c
 clean:
 	rm -rf $(OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean || true
 
 fclean: clean
 	rm -f $(NAME) $(NAME_BONUS)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(MLX_LIB)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
