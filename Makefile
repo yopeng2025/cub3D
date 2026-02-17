@@ -4,9 +4,10 @@ NAME_BONUS = cub3D_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iinclude -Ilibft
 
+SUBMODULES = git submodule update --init --recursive
+
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
-MLX_REPO = https://github.com/42Paris/minilibx-linux.git
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -82,9 +83,7 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MLX_LIB):
-	if [ ! -d $(MLX_DIR) ]; then \
-		git clone $(MLX_REPO) $(MLX_DIR); \
-	fi
+	$(SUBMODULES)
 	$(MAKE) -C $(MLX_DIR)
 
 $(OBJ_DIR)/%.o: src/%.c
