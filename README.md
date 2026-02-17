@@ -57,6 +57,6 @@ make bonus
 ./cub3D_bonus maps/map1.cub
 ```
 
-
+![Gameplay demo](cub3D.gif)
 
 
