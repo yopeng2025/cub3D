@@ -21,6 +21,7 @@
 * **Concepts**:
     * **Textures & Colors**: Extracting wall paths and RGB values for floor/ceiling.
     * **Map Integrity**: Ensuring the map is fully enclosed by walls and the starting position is unique.
+    * **Dynamic Lighting Logic**: To simulate a fixed **Southeastern Sun**, the parser handles specific texture assignments (NO, SO, EA, WE) to mimic realistic                                       light and shadow casting based on wall orientation.
 
 ### 🔵 Part 2: Core Rendering
 * **Goal**: High-performance pixel manipulation.
@@ -43,16 +44,19 @@
     * **Movement & Rotation**: Smooth $W, A, S, D$ and arrow key transitions.
     * **Memory Management**: Ensuring all MLX pointers and image buffers are properly freed on exit.
 
+## 🛠️ Usage & Compilation
 
-## 🚀 Technical Requirements
-* **Graphics Library**: `miniLibX`.
-* **Language**: C (Norminette compliant).
-* **Compiler**: `cc` with `-Wall -Wextra -Werror`.
-* **Math**: Vector arithmetic and Trigonometry (sin/cos).
+### 1. Mandatory Part
+```bash
+make
+./cub3D maps/map1.cub
+```
+### 2. Bonus Part
+```bash
+make bonus
+./cub3D_bonus maps/map1.cub
+```
 
 
 
-### 💡 Implementation Details:
-1. **Collision Logic**: Instead of just checking if the new `x, y` is a wall, I implemented a small "hitbox" buffer to ensure the player doesn't get stuck in the corners.
-2. **Minimap Scaling**: The minimap uses a dedicated image buffer to render tiles and the player's position, scaled dynamically to maintain visibility without obstructing the main view.
 
