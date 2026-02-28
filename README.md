@@ -1,7 +1,8 @@
 # cub3D - Raycasting 3D Engine
+![Demo](cub3D.gif)
 
 A 3D maze rendering engine using raycasting. Renders first-person perspective with texture-mapped walls and real-time collision detection.
-![Demo](cub3D.gif)
+
 
 ## Project Structure
 
