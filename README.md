@@ -165,17 +165,40 @@ void calculate_wall_properties(t_ray_casting *rc, t_data *data) {
 
 ### Rendering Textured Column
 
-```c
-// For each pixel in the column:
-// - Map vertical screen position to texture V coordinate (0-texture_height)
-// - Fetch RGB from texture[tex_x][tex_y]
-// - Write to framebuffer
-```
+For each pixel in the column:
+ - Map vertical screen position to texture V coordinate (0-texture_height)
+ - Fetch RGB from texture[tex_x][tex_y]
+ - Write to framebuffer
 
 **Key insight:** Wall height inversely proportional to distance. Texture stretches
 to fill the column, creating perspective illusion.
 
 
+### MinilibX 
+
+MiniLibX is included as a Git submodule rather than being stored directly in the main repository.
+
+Create .gitmodules
+
+```c
+vim .gitmodules
+```
+Add the following configuration:
+```c
+[submodule "minilibx-linux"]
+    path = minilibx-linux
+    url = https://github.com/42Paris/minilibx-linux.git
+```
+Alternatively, the submodule can be added directly with:
+```c
+git submodule add https://github.com/42Paris/minilibx-linux.git minilibx-linux
+git add .gitmodules minilibx-linux
+git commit -m "Add minilibx-linux as a git submodule"
+git push origin main
+```
+Git stores the submodule's repository URL and path in the main repository, but the MiniLibX source code itself is not directly stored in the main repository.
+
+When submitting the project, include .gitmodules, but do not commit the actual `MiniLibX`source files.
 
 ## Build
 
@@ -188,9 +211,24 @@ sudo apt-get install -y libx11-dev libxext-dev libxrandr-dev libxinerama-dev lib
 brew install x11
 ```
 
-**Compile:**
+**Compile & Run:**
+
 ```bash
-make && ./cub3D map/1.cub
+# Optional
+git submodule update --init --recursive
+cd minilibx-linux
+make
+```
+```bash
+make
+./cub3D map/1.cub
+```
+Run it with Valgrind:
+```bash
+valgrind ./Cub3D map/1.cub
 ```
 
 **Controls:** `W/A/S/D` = Move/Turn, `ESC` = Exit
+
+
+Known issue: MiniLibX may fail to compile with GCC 16 due to incompatibilities between its legacy function declarations and modern C compiler behavior.
