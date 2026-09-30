@@ -218,6 +218,7 @@ brew install x11
 git submodule update --init --recursive
 cd minilibx-linux
 make
+cd ..
 ```
 ```bash
 make
